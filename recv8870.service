@@ -1,0 +1,13 @@
+[Unit]
+Description=Power logger for USB-Clampmeter E8870
+After=snmpd.service
+
+[Service]
+Type=forking
+ExecStart=/usr/local/virtualenv/p3/bin/python /usr/local/bin/recv8870.py
+ExecStop=/bin/kill -TERM $MAINPID
+PIDFile=/var/run/recv8870.pid
+Restart=alwayes
+
+[Install]
+WantedBy=multi-user.target
